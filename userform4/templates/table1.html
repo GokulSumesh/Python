@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details</title>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid black;
+      }
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+      }
+      button{
+        padding: 10px;
+        text-align: left;
+        border-radius: 5px;
+      }
+      #row{
+            display:flex;
+            justify-content: space-between;
+      }
+
+    </style>
+
+</head>
+<body>
+    <table>
+        <thead>
+            <th>S.No</th>
+            <th>Qualifications</th>
+            <th>Month & Year of Passing</th>
+            <th>Name of the University</th>
+
+        </thead>
+
+        {%for user in users%}
+        <tr>
+            <td>{{user.id}}</td>
+            <td>{{user.qul}}</td>
+            <td>{{user.myp}}</td>
+            <td id="row">
+                {{user.uname}}
+            </td>
+            <td>{{user.fk_id}}</td>
+        </tr>
+        {% endfor %} 
+
+
+
+       
+    </table>
+</body>
+</html>

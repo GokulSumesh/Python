@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid black;
+      }
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+      }
+      button{
+        padding: 10px;
+        text-align: left;
+        border-radius: 5px;
+      }
+      #row{
+            display:flex;
+            justify-content: space-between;
+      }
+
+    </style>
+
+</head>
+<body>
+    <table>
+        <thead>
+            <th>S.No</th>
+            <th>Username</th>
+            <th>Age</th>
+            <th>date of Birth</th>
+            <th>Email</th>
+            <th>Password</th>
+        </thead>
+
+        {%for user in users%}
+        <tr>
+            <td>{{user.id}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.age}}</td>
+            <td>{{user.dob}}</td>
+            <td>{{user.email}}</td>
+            <td id="row">
+                {{user.password}}
+                <button><a href="/delete/{{user.id}}">Delete</a></button>
+                <button><a href="/update/{{user.id}}">Edit</a></button>
+
+            </td>
+
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

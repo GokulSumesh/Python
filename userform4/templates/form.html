@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Personal Information Form</h2>
+        <form action="/form" method="post" enctype="multipart/form-data">
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter your name" name="name">
+            </div>
+
+            <div class="mb-3">
+                <label for="image" class="form-label">Upload Image</label>
+                <input type="file" class="form-control" id="image" name="image">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Select Hobbies</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="Books" id="hobbyBooks" name="value1">
+                    <label class="form-check-label" for="hobbyBooks">Books</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="Games" id="hobbyGames" name="value1">
+                    <label class="form-check-label" for="hobbyGames">Games</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="Painting" id="hobbyPainting" name="value1">
+                    <label class="form-check-label" for="hobbyPainting">Painting</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="Gardening" id="hobbyGardening" name="value1">
+                    <label class="form-check-label" for="hobbyGardening">Gardening</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="Learning" id="hobbyLearning" name="value1">
+                    <label class="form-check-label" for="hobbyLearning">Learning</label>
+                </div>
+            </div>
+
+            <div class="mb-3" id="qualification-container">
+                <h4>Qualifications</h4>
+
+                <div class="qualification">
+                    <input type="text" class="form-control mt-4" placeholder="Enter your Qualifications" name="qul">
+                    <input type="month" class="form-control mt-4" placeholder="Month/Year" name="myp">
+                    <input type="text" class="form-control mt-4" placeholder="Enter Name of School/University" name="uname"> 
+                    <button type="button" class="btn btn-danger mt-2" onclick="del(this)">Delete</button>
+                </div>
+
+            </div>
+
+            <button type="button" class="btn btn-info mt-3" onclick="add()">+ Additional Qualification</button><br>
+
+            <button type="submit" class="btn btn-primary mt-4">Submit</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        function add() {
+            let qualificationContainer = document.getElementById('qualification-container');
+            let newQualificationDiv = document.createElement('div');
+            newQualificationDiv.classList.add('qualification');
+
+            newQualificationDiv.innerHTML = `
+                <input type="text" class="form-control mt-4" placeholder="Enter your Qualifications" name="qul">
+                <input type="month" class="form-control mt-4" placeholder="Month/Year" name="myp">
+                <input type="text" class="form-control mt-4" placeholder="Enter Name of School/University" name="uname">
+                <button type="button" class="btn btn-danger mt-2" onclick="del(this)">Delete</button>
+            `;
+            qualificationContainer.appendChild(newQualificationDiv);
+        }
+        function del(button) {
+            let qualificationDiv = button.closest('.qualification');
+            qualificationDiv.remove();
+        }
+    </script>
+</body>
+</html>
