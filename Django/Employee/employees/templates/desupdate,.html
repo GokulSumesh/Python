@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Designation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 24px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        select,
+        textarea {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333;
+            outline: none;
+            transition: border-color 0.3s;
+            width: 100%;
+        }
+
+        input[type="text"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #007bff;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        button {
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Update Designation</h1>
+        <form action="/des/{{ designation.id }}/update/" method="POST">
+            {% csrf_token %}
+
+            <label for="designation_name">Designation Name:</label>
+            <input type="text" id="designation_name" name="designation_name" value="{{ designation.designation_name }}" required>
+
+            <label for="designation_dept">Designation Department:</label>
+            <select id="designation_dept" name="designation_dept" required>
+                <option value="" disabled>Select Department</option>
+                {% for department in departments %}
+                    <option value="{{ department.id }}" {% if department.id == designation.designation_dept.id %}selected{% endif %}>
+                        {{ department.dept_name }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <label for="designation_description">Designation Description:</label>
+            <textarea id="designation_description" name="designation_description" required>{{ designation.designation_description }}</textarea>
+
+            <button type="submit">Update Designation</button>
+        </form>
+    </div>
+
+</body>
+</html>

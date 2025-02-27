@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px; 
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            max-width: 1200px; 
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+            word-wrap: break-word; 
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        td img {
+            width: 80px; 
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            padding: 5px 10px;
+            text-decoration: none;
+            color: white;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .btn-edit {
+            background-color: #ffc107;
+        }
+        .btn-delete {
+            background-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Employee List</h1>
+    </header>
+    <a href="/empform" class="btn btn-edit">Insert data</a>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Date of Birth</th>
+                    <th>Address</th>
+                    <th>Email</th>
+                    <th>Department</th>
+                    <th>Designation</th>
+                    <th>Date of Joining</th>
+                    <th>Image</th> 
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for emp in emp %}
+                <tr>
+                    <td>{{ emp.name }}</td>
+                    <td>{{ emp.gender }}</td>
+                    <td>{{ emp.dob }}</td>
+                    <td>{{ emp.address }}</td>
+                    <td>{{ emp.email }}</td>
+                    <td>{{ emp.department.dept_name }}</td>
+                    <td>{{ emp.designation.designation_name }}</td>
+                    <td>{{ emp.doj }}</td>
+                    <td>
+                        {% if emp.image %}
+                            <img src="{{ emp.image.url }}" alt="">
+                        {% else %}
+                            <span>No Image</span>
+                        {% endif %}
+                    </td>
+                    <td class="actions">
+                        <a href="/emp/{{ emp.id }}/update_form/" class="btn btn-edit">Update</a>
+                        <a href="/emp/{{ emp.id }}/delete/" class="btn btn-delete">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="10">No employees available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
